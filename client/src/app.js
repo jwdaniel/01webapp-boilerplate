@@ -6,9 +6,10 @@ import io from 'socket.io-client'
 import { Map } from 'immutable'
 
 import App from './components/App'
-import { CounterContainer } from './components/Counter'
+import CounterContainer from './containers/CounterContainer'
 import { setState } from './actions/counter'
 import configureStoreWithSocket from './store'
+import DevTools from './containers/DevTools'
 
 let store
 if (true) {
@@ -27,12 +28,15 @@ if (true) {
 }
 
 ReactDOM.render(
-	<Provider store={store}>
-		<Router>
-			<Route component={App}>
-				<Route path="/" component={CounterContainer} />
-			</Route>
-		</Router>
-	</Provider>,
+	<div>
+		<Provider store={store}>
+			<Router>
+				<Route component={App}>
+					<Route path="/" component={CounterContainer} />
+				</Route>
+			</Router>
+		</Provider>
+		<DevTools store={store} />
+	</div>,
 	document.getElementById('app')
 )

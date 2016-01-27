@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as CounterActions from '../actions/counter'
 
 export default class Counter extends Component {
 
@@ -29,12 +26,4 @@ export default class Counter extends Component {
 	}
 
 }
-
-export const CounterContainer = connect(
-	state => ({
-		counter: state.counter.get('counter') ? state.counter.get('counter') : 0
-	}),
-	// dispatch => bindActionCreators(CounterActions, dispatch)
-	CounterActions
-)(Counter)
 

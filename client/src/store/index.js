@@ -1,10 +1,12 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import remoteActionMiddleware from './remoteActionMiddleware'
 import reducer from '../reducers'
+import DevTools from '../containers/DevTools'
 
 export default function configureStoreWithSocket(socket) {
-	const createStoreWithMiddleware = applyMiddleware(
-		remoteActionMiddleware(socket)
+	const createStoreWithMiddleware = compose(
+		applyMiddleware(remoteActionMiddleware(socket)),
+		DevTools.instrument()
 	)(createStore)
 	const store = createStoreWithMiddleware(reducer)
 
